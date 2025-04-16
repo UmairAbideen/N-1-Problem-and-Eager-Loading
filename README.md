@@ -5,6 +5,7 @@ This repository demonstrates the difference between the N+1 problem and Eager Lo
 ## 🔍 N+1 Problem Example
 
 // fetching main record
+
 $posts = Post::all();
 
 // fetching related record for each post
@@ -24,6 +25,7 @@ In the N+1 problem, the main query runs once to fetch the primary table (e.g., p
 # Laravel Eager Loading
 
 // fetching main and related record in one query
+
 $posts = Post::with('comments')->get();
 
 // loop is used only to iterate over already fethed records 
