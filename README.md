@@ -1,18 +1,20 @@
 # Laravel N+1 Problem vs Eager Loading
 
-This repository demonstrates the difference between the N+1 problem and Eager Loading in Laravel using Eloquent relationships.
+This repository demonstrates the difference between the **N+1 problem** and **Eager Loading** in Laravel using Eloquent relationships.
+
+---
 
 ## 🔍 N+1 Problem Example
 
-// fetching main record
-
+```php
+// Fetching main records
 $posts = Post::all();
 
-// fetching related record for each post
+// Fetching related records for each post
 foreach ($posts as $post) {
     echo $post->title;
 
-    // But this line causes one query per post (N queries)
+    // This line causes one query per post (N queries total)
     foreach ($post->comments as $comment) {
         echo $comment->body;
     }
@@ -22,13 +24,12 @@ Total queries = 1 (posts) + N (comments)
 In the N+1 problem, the main query runs once to fetch the primary table (e.g., posts), but the related query (e.g., comments) runs once for every record, resulting in N extra queries.
 
 
-# Laravel Eager Loading
+## Laravel Eager Loading
 
-// fetching main and related record in one query
-
+// Fetching main and related records in one go
 $posts = Post::with('comments')->get();
 
-// loop is used only to iterate over already fethed records 
+// Loop only iterates over already fetched records
 foreach ($posts as $post) {
     echo $post->title;
 
@@ -36,7 +37,6 @@ foreach ($posts as $post) {
         echo $comment->body;
     }
 }
-
 Total queries = 1 (posts) + 1 (comments)
 
 In eager loading, both the main and related data are fetched in just 2 queries, regardless of how many records there are. 
