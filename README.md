@@ -4,7 +4,7 @@ This repository demonstrates the difference between the **N+1 problem** and **Ea
 
 ---
 
-## 🔍 N+1 Problem Example
+N+1 Problem Example
 
 ```php
 // Fetching main records
